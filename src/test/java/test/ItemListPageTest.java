@@ -5,7 +5,12 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Collections;
+import java.util.List;
+
 public class ItemListPageTest extends BaseTest{
+
+
 
     @BeforeMethod
     public void LogInAndGoToLandingPage(){
@@ -13,6 +18,7 @@ public class ItemListPageTest extends BaseTest{
                 .typePassword("secret_sauce")
                 .clickLoginButton();
     }
+
 
     @Test
     public void TC007RedirectToItemPage() {
@@ -69,20 +75,37 @@ public class ItemListPageTest extends BaseTest{
     @Test
     public void TC012SortByNameAsc(){
 
+        List<String> idealList = itemListPage.getProductNameList();
+        Collections.sort(idealList);
+        itemListPage.sortAtoZ();
+        List<String> afterSortList  = itemListPage.getProductNameList();
+        Assert.assertTrue(idealList.equals(afterSortList));
     }
 
     @Test
     public void TC013SortByNameDsc(){
-
+        List<String> idealList = itemListPage.getProductNameList();
+        Collections.sort(idealList, Collections.reverseOrder());
+        itemListPage.sortZtoA();
+        List<String> afterSortList  = itemListPage.getProductNameList();
+        Assert.assertTrue(idealList.equals(afterSortList));
     }
 
     @Test
     public void TC014SortByPriceLowToHigh(){
-
+       List<Float> idealList = itemListPage.getProductPriceList();
+       Collections.sort(idealList);
+       itemListPage.sortLowHigh();
+       List<Float> afterSortList = itemListPage.getProductPriceList();
+       Assert.assertTrue(idealList.equals(afterSortList));
     }
 
     @Test
     public void TC015SortByPriceHighToLow(){
-
+        List<Float> idealList = itemListPage.getProductPriceList();
+        Collections.sort(idealList,Collections.reverseOrder());
+        itemListPage.sortHighLow();
+        List<Float> afterSortList = itemListPage.getProductPriceList();
+        Assert.assertTrue(idealList.equals(afterSortList));
     }
 }

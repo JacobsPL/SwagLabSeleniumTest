@@ -27,8 +27,8 @@ public class BaseTest {
         driver.get("https://www.saucedemo.com");
 
         loginPage = new LoginPage(driver);
-        itemListPage = new ItemListPage(driver);
         itemPage = new ItemPage(driver);
+        itemListPage = new ItemListPage(driver);
     }
 
 

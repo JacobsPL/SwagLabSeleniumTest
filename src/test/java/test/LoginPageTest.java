@@ -1,9 +1,22 @@
 package test;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static java.lang.Thread.sleep;
+
 public class LoginPageTest extends BaseTest {
+
+
+
+    @Test
+    public void testToTest() throws InterruptedException {
+        WebElement loginBox = driver.findElement(By.id("user-name"));
+        loginBox.sendKeys("LOGIN0");
+        sleep(1000);
+    }
 
     @Test
     public void TC001HappyPathLogin(){
