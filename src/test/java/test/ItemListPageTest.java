@@ -14,9 +14,7 @@ public class ItemListPageTest extends BaseTest{
 
     @BeforeMethod
     public void LogInAndGoToLandingPage(){
-        loginPage.typeUsername("standard_user")
-                .typePassword("secret_sauce")
-                .clickLoginButton();
+        logInAsStandardUser();
     }
 
 

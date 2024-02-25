@@ -31,6 +31,11 @@ public class BaseTest {
         itemListPage = new ItemListPage(driver);
     }
 
+    public void logInAsStandardUser(){
+        loginPage.typeUsername("standard_user")
+                .typePassword("secret_sauce")
+                .clickLoginButton();
+    }
 
     @AfterMethod
     public void tearDown(){
