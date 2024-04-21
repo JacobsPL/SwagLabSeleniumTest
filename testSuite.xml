@@ -1,0 +1,31 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name = "All Tests">
+
+    <test name = "ItemListPageTest">
+        <classes>
+            <class name = "test.ItemListPageTest" />
+        </classes>
+    </test>
+
+    <test name = "ItemTest">
+        <classes>
+            <class name = "test.ItemTest" />
+        </classes>
+    </test>
+
+    <test name = "LoginPageTest">
+        <classes>
+            <class name = "test.LoginPageTest">
+            </class>
+        </classes>
+    </test>
+
+    <test name = "CheckoutPageTest">
+        <classes>
+            <class name = "test.CheckoutPageTest">
+            </class>
+        </classes>
+    </test>
+</suite>

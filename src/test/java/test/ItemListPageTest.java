@@ -22,10 +22,13 @@ public class ItemListPageTest extends BaseTest{
     public void TC007RedirectToItemPage() {
 
         WebElement testItem = itemListPage.getItem(0);
-        String itemNameList = itemListPage.getItemName(testItem);
+        String itemName = itemListPage.getItemName(testItem);
         itemListPage.getItemLink(testItem).click();
+        //Get string of item name from item page
         String itemNameDetails = itemPage.getItemName();
-        Assert.assertEquals(itemNameList,itemNameDetails);
+        //Verify that name of the chosen item on the list
+        // is equal to the item name on the redirected page
+        Assert.assertEquals(itemName,itemNameDetails);
     }
 
     @Test

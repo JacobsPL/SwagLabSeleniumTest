@@ -1,22 +1,14 @@
 package test;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static java.lang.Thread.sleep;
-
 public class LoginPageTest extends BaseTest {
 
-
-
-    @Test
-    public void testToTest() throws InterruptedException {
-        WebElement loginBox = driver.findElement(By.id("user-name"));
-        loginBox.sendKeys("LOGIN0");
-        sleep(1000);
-    }
+    public final static String USER_NOT_FOUND_ERROR = "Epic sadface: Username and password do not match any user in this service";
+    public final static String NO_USERNAME_ERROR = "Epic sadface: Username is required";
+    public final static String NO_PASSWORD_ERROR = "Epic sadface: Password is required";
+    public final static String USER_BLOCKED_ERROR = "Epic sadface: Sorry, this user has been locked out.";
 
     @Test
     public void TC001HappyPathLogin(){
@@ -34,9 +26,7 @@ public class LoginPageTest extends BaseTest {
                     .typePassword("secret_sauce")
                         .clickLoginButton();
 
-
-        String expectedErrorMesage = "Epic sadface: Username and password do not match any user in this service";
-        Assert.assertEquals(expectedErrorMesage,loginPage.getErrorMessage());
+        Assert.assertEquals(USER_NOT_FOUND_ERROR,loginPage.getErrorMessage());
     }
 
     @Test
@@ -45,8 +35,7 @@ public class LoginPageTest extends BaseTest {
                     .typePassword("wrong_password")
                         .clickLoginButton();
 
-        String expectedErrorMesage = "Epic sadface: Username and password do not match any user in this service";
-        Assert.assertEquals(expectedErrorMesage,loginPage.getErrorMessage());
+        Assert.assertEquals(USER_NOT_FOUND_ERROR,loginPage.getErrorMessage());
     }
 
     @Test
@@ -55,8 +44,7 @@ public class LoginPageTest extends BaseTest {
                     .typePassword("wrong_password")
                         .clickLoginButton();
 
-        String expectedErrorMesage = "Epic sadface: Username is required";
-        Assert.assertEquals(expectedErrorMesage,loginPage.getErrorMessage());
+        Assert.assertEquals(NO_USERNAME_ERROR,loginPage.getErrorMessage());
 
     }
 
@@ -66,8 +54,7 @@ public class LoginPageTest extends BaseTest {
                     .typePassword("")
                         .clickLoginButton();
 
-        String expectedErrorMesage = "Epic sadface: Password is required";
-        Assert.assertEquals(expectedErrorMesage,loginPage.getErrorMessage());
+        Assert.assertEquals(NO_PASSWORD_ERROR,loginPage.getErrorMessage());
 
     }
 
@@ -77,7 +64,6 @@ public class LoginPageTest extends BaseTest {
                 .typePassword("secret_sauce")
                 .clickLoginButton();
 
-        String expectedErrorMesage = "Epic sadface: Sorry, this user has been locked out.";
-        Assert.assertEquals(expectedErrorMesage,loginPage.getErrorMessage());
+        Assert.assertEquals(USER_BLOCKED_ERROR,loginPage.getErrorMessage());
     }
 }

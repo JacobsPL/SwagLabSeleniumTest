@@ -4,12 +4,11 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class ItemPage extends BasePage{
 
     public ItemPage(WebDriver driver){
-        PageFactory.initElements(driver,this);
+        super(driver);
     }
 
     @FindBy(css = "[class = 'inventory_details_name large_size']")
