@@ -68,7 +68,8 @@ public class ItemListPageTest extends BaseTest{
         WebElement testItem = itemListPage.getItem(0);
         itemListPage.getAddToCartButton(testItem).click();
         itemListPage.logout();
-        LogInAndGoToLandingPage();
+        logInAsStandardUser();
+        //LogInAndGoToLandingPage();
         Assert.assertEquals(itemListPage.getNumberOfItemsInCart(),1);
     }
 

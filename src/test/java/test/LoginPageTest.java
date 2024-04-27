@@ -1,7 +1,14 @@
 package test;
 
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginPageTest extends BaseTest {
 
@@ -65,5 +72,37 @@ public class LoginPageTest extends BaseTest {
                 .clickLoginButton();
 
         Assert.assertEquals(USER_BLOCKED_ERROR,loginPage.getErrorMessage());
+    }
+
+    @Test(dataProvider = "loginData")
+    public void TC020CSVUsersLogin(String username, String password){
+        loginPage.typeUsername(username)
+                .typePassword(password)
+                .clickLoginButton();
+
+        String expectedLandingPageURL = "https://www.saucedemo.com";
+        Assert.assertTrue(driver.getCurrentUrl().contains(expectedLandingPageURL));
+    }
+
+    @DataProvider(name = "loginData")
+    public Object[][] provideData() throws IOException {
+        List<String[]> records = new ArrayList<>();
+        String line;
+        BufferedReader fileReader = new BufferedReader(new FileReader("swag_labs_users.csv"));
+
+        // Read CSV file line by line
+        while ((line = fileReader.readLine()) != null) {
+            String[] fields = line.split(",");
+            records.add(fields);
+        }
+
+        fileReader.close();
+
+        Object[][] data = new Object[records.size()][2];
+        for (int i = 0; i < records.size(); i++) {
+            data[i] = records.get(i);
+        }
+
+        return data;
     }
 }

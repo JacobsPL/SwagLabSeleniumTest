@@ -19,7 +19,6 @@ public class BaseTest {
     protected LoginPage loginPage;
     protected ItemListPage itemListPage;
     protected ItemPage itemPage;
-
     private final String USER_LOGIN = "standard_user";
     private final String USER_PASSWORD = "secret_sauce";
     private final String TEST_SITE = "https://www.saucedemo.com";
@@ -62,7 +61,6 @@ public class BaseTest {
                 return false;
             }
         }
-
         return true;
     }
 
