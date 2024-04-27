@@ -90,7 +90,6 @@ public class LoginPageTest extends BaseTest {
         String line;
         BufferedReader fileReader = new BufferedReader(new FileReader("swag_labs_users.csv"));
 
-        // Read CSV file line by line
         while ((line = fileReader.readLine()) != null) {
             String[] fields = line.split(",");
             records.add(fields);
