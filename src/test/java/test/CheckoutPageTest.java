@@ -1,5 +1,6 @@
 package test;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -12,6 +13,7 @@ import java.util.Map;
 public class CheckoutPageTest extends BaseTest {
 
     protected CheckoutPage checkoutPage;
+    private final static String FINAL_MESSAGE = "Thank you for your order!";
     @BeforeMethod
     public void CheckoutPageTestSetUp(){
         this.checkoutPage = new CheckoutPage(driver);
@@ -38,7 +40,19 @@ public class CheckoutPageTest extends BaseTest {
 
         Map<String, Double> mapOfProductsInCheckout =
                 checkoutPage.getProductMap();
-
         Assert.assertTrue(mapsAreEqual(mapOfItems,mapOfProductsInCheckout));
+    }
+
+    @Test
+    public void TC019CheckoutHappyPath(){
+        itemListPage.getAddToCartButton(itemListPage.getItem(0)).click();
+        basePage.clickOnCartButton()
+                .clickCheckoutButton()
+                .fillInformation
+                        ("Jakub","Krawczyk", "00-761")
+                .clickContinue();
+        checkoutPage.clickFinish();
+        WebElement finalMessage = driver.findElement(By.cssSelector("h2[class='complete-header']"));
+        Assert.assertEquals(finalMessage.getText(),FINAL_MESSAGE);
     }
 }

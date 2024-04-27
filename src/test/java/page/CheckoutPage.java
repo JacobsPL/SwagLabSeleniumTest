@@ -33,6 +33,9 @@ public class CheckoutPage extends BasePage{
     @FindAll(@FindBy(css = "div[class='cart_item']"))
     List<WebElement> listOfProduct;
 
+    @FindBy(id ="finish")
+    private WebElement finishButton;
+
     public CheckoutPage fillInformation(String fname, String lname, String zcode){
         firstNameInput.sendKeys(fname);
         lastNameInput.sendKeys(lname);
@@ -67,6 +70,11 @@ public class CheckoutPage extends BasePage{
 
     public CheckoutPage clickContinue(){
         continueButton.click();
+        return this;
+    }
+
+    public CheckoutPage clickFinish(){
+        finishButton.click();
         return this;
     }
 
