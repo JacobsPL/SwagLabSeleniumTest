@@ -31,7 +31,10 @@ public class BaseTest {
     public void Setup() {
 
         String os = System.getProperty("os.name").toLowerCase();
+        System.out.println(os);
+        FirefoxOptions options = new FirefoxOptions();
         if (os.contains("mac")) {
+            options.setBinary("/Applications/Firefox.app/Contents/MacOS/firefox");
             System.setProperty("webdriver.gecko.driver", "./GecoDriver/geckodriver");
         }
         else if (os.contains("win")) {
@@ -40,8 +43,7 @@ public class BaseTest {
             throw new IllegalStateException("Unsupported operating system: " + os);
         }
 
-        FirefoxOptions options = new FirefoxOptions();
-        options.setBinary("/Applications/Firefox.app/Contents/MacOS/firefox");
+
 
         driver = new FirefoxDriver(options);
         driver.manage().window().maximize();
