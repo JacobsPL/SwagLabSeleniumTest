@@ -2,6 +2,7 @@ package test;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import page.BasePage;
@@ -28,8 +29,21 @@ public class BaseTest {
 
     @BeforeMethod
     public void Setup() {
-        //System.setProperty("webdriver.geco.driver", "C:\\Users\\jakub\\OneDrive\\Pulpit\\Programowanko\\Selenium\\gecodriver-v0.33.0-win64\\geckodriver.exe");
-        driver = new FirefoxDriver();
+
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains("mac")) {
+            System.setProperty("webdriver.gecko.driver", "./GecoDriver/geckodriver");
+        }
+        else if (os.contains("win")) {
+            System.setProperty("webdriver.geco.driver","./GecoDriver/geckodriver.exe");
+        } else {
+            throw new IllegalStateException("Unsupported operating system: " + os);
+        }
+
+        FirefoxOptions options = new FirefoxOptions();
+        options.setBinary("/Applications/Firefox.app/Contents/MacOS/firefox");
+
+        driver = new FirefoxDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         driver.get(TEST_SITE);
